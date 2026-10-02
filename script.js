@@ -1,6 +1,22 @@
 const menuButton = document.querySelector('.menu-toggle');
 const mainNav = document.querySelector('.mobile-nav');
 
+// Animate only on entry; content is visible by default and keeps its place.
+const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+if (document.documentElement.classList.contains('heritage-home') &&
+    !reducedMotion.matches && 'IntersectionObserver' in window) {
+  const entrances = new IntersectionObserver((entries, observer) => {
+    entries.forEach(({ target, isIntersecting }) => {
+      if (!isIntersecting) return;
+      target.classList.add('heritage-enter');
+      target.addEventListener('animationend', () => target.classList.remove('heritage-enter'), { once: true });
+      observer.unobserve(target);
+    });
+  }, { threshold: .12 });
+  document.querySelectorAll('.hero-copy, .hero-art, .intro h2, .intro-note, .signature-image, .signature-copy, .closing p')
+    .forEach(element => entrances.observe(element));
+}
+
 if (menuButton && mainNav) {
   menuButton.addEventListener('click', () => {
     const isOpen = menuButton.getAttribute('aria-expanded') === 'true';
@@ -16,27 +32,4 @@ if (menuButton && mainNav) {
       mainNav.classList.remove('is-open');
     }
   });
-}
-
-const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-const motionTargets = document.querySelectorAll('.reveal-text, .reveal-copy');
-
-if (motionTargets.length && !reduceMotion) {
-  document.body.classList.add('motion-ready');
-
-  if ('IntersectionObserver' in window) {
-    const revealObserver = new IntersectionObserver((entries, observer) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('is-visible');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.18, rootMargin: '0px 0px -35px 0px' });
-
-    motionTargets.forEach((element) => revealObserver.observe(element));
-
-  } else {
-    motionTargets.forEach((element) => element.classList.add('is-visible'));
-  }
 }
