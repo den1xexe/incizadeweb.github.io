@@ -1,5 +1,5 @@
 const menuButton = document.querySelector('.menu-toggle');
-const mainNav = document.querySelector('.main-nav');
+const mainNav = document.querySelector('.mobile-nav');
 
 if (menuButton && mainNav) {
   menuButton.addEventListener('click', () => {
@@ -16,4 +16,27 @@ if (menuButton && mainNav) {
       mainNav.classList.remove('is-open');
     }
   });
+}
+
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const motionTargets = document.querySelectorAll('.reveal-text, .reveal-copy');
+
+if (motionTargets.length && !reduceMotion) {
+  document.body.classList.add('motion-ready');
+
+  if ('IntersectionObserver' in window) {
+    const revealObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.18, rootMargin: '0px 0px -35px 0px' });
+
+    motionTargets.forEach((element) => revealObserver.observe(element));
+
+  } else {
+    motionTargets.forEach((element) => element.classList.add('is-visible'));
+  }
 }
