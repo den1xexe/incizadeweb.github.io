@@ -325,6 +325,40 @@ img { display: block; max-width: 100%; }
   .product-detail .detail-copy h1 { font-size: clamp(2.4rem, 10vw, 3.5rem); }
   .detail-navigation a { padding-block: 8px; }
 }
+/* Privacy controls share the site's restrained traditional palette. */
+.legal-page { max-width: 960px; padding-block: clamp(48px, 7vw, 96px); }
+.legal-page h1 { font-size: clamp(2.4rem, 6vw, 4.5rem); line-height: 1.15; margin: 28px 0 16px; }
+.legal-page h2 { font-size: 1.65rem; margin: 36px 0 12px; }
+.legal-page p, .legal-page dd { line-height: 1.85; margin-bottom: 18px; overflow-wrap: anywhere; }
+.legal-page a, .privacy-banner a, .privacy-dialog a { text-decoration: underline; text-underline-offset: 3px; }
+.legal-date { font-size: .8rem; }
+.legal-lead { font-size: 1.1rem; }
+.legal-draft { border-left: 2px solid var(--gold); padding: 16px 20px; background: var(--cream); }
+.site-footer .legal-nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 24px; margin: 24px 0; }
+.legal-nav a, .legal-nav button { font: inherit; font-size: .78rem; padding: 12px 0; color: inherit; }
+.legal-nav button { background: none; border: 0; cursor: pointer; text-decoration: underline; text-underline-offset: 4px; }
+.privacy-banner { position: fixed; z-index: 1000; bottom: 16px; left: 16px; right: 16px; max-width: 1120px; margin: auto; display: flex; align-items: center; gap: 28px; padding: 24px; background: #faf7ef; color: #41482c; border: 1px solid #aa8544; box-shadow: 0 8px 40px #20231524; max-height: 65dvh; overflow-y: auto; }
+.privacy-banner[hidden] { display: none; }
+.privacy-banner strong { font-family: 'Playfair Display', Georgia, serif; font-size: 1.25rem; }
+.privacy-banner p, .privacy-dialog p, .privacy-dialog dd { font-size: .88rem; line-height: 1.7; margin: 10px 0 0; }
+.privacy-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+.privacy-banner .privacy-actions { flex: 0 0 260px; }
+.privacy-actions button { min-height: 44px; padding: 12px 16px; border: 1px solid #777b61; color: #41482c; background: transparent; font: inherit; font-size: .8rem; cursor: pointer; }
+.privacy-actions button:hover { background: #eae5d8; }
+.privacy-dialog { width: min(580px, calc(100% - 32px)); max-height: 85dvh; overflow-y: auto; margin: auto; padding: clamp(20px, 5vw, 36px); border: 1px solid #aa8544; background: #faf7ef; color: #41482c; }
+.privacy-dialog::backdrop { background: #20231599; }
+.privacy-dialog h2 { font-size: 2rem; margin: 0; }
+.privacy-dialog dl { margin-block: 24px; border-block: 1px solid #d8cfbb; padding-block: 20px; }
+.privacy-dialog dt { font-weight: 600; margin-top: 16px; }
+.privacy-dialog dt:first-child { margin-top: 0; }
+.privacy-dialog dd { margin-left: 0; }
+.privacy-dialog .privacy-actions { margin-top: 20px; }
+@media (max-width: 680px) {
+  .privacy-banner { bottom: 8px; left: 8px; right: 8px; padding: 18px; display: block; }
+  .privacy-banner .privacy-actions { margin-top: 14px; }
+  .privacy-actions button { flex: 1 1 150px; }
+  .site-footer .legal-nav { gap: 4px 20px; }
+}
 /* Traditional proportions, pearl surfaces and restrained gold details. */
 :focus-visible { outline: 2px solid var(--gold); outline-offset: 6px; }
 .brand img { flex-shrink: 0; }
